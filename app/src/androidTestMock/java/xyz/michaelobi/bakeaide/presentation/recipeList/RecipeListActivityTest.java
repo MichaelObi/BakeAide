@@ -1,5 +1,6 @@
 package xyz.michaelobi.bakeaide.presentation.recipeList;
 
+import android.content.ComponentName;
 import android.support.test.espresso.contrib.RecyclerViewActions;
 import android.support.test.espresso.intent.Intents;
 import android.support.test.rule.ActivityTestRule;
@@ -14,12 +15,13 @@ import org.junit.runner.RunWith;
 import xyz.michaelobi.bakeaide.R;
 import xyz.michaelobi.bakeaide.presentation.recipeDetails.RecipeDetailsActivity;
 
+import static android.support.test.InstrumentationRegistry.getTargetContext;
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.intent.Intents.intended;
-import static android.support.test.espresso.intent.matcher.ComponentNameMatchers.hasShortClassName;
 import static android.support.test.espresso.intent.matcher.IntentMatchers.hasComponent;
+import static android.support.test.espresso.intent.matcher.IntentMatchers.toPackage;
 import static android.support.test.espresso.matcher.ViewMatchers.isCompletelyDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 
@@ -51,12 +53,9 @@ public class RecipeListActivityTest {
 
     @Test
     public void onClickingRecipeCard_OpenRecipeDetails() {
-//        intending(hasComponent(hasShortClassName(".RecipeDetailActivity")))
-//                .respondWith(new Instrumentation.ActivityResult(Activity.RESULT_OK, null));
         onView(withId(R.id.rv_recipes))
                 .perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
-        intended(hasComponent(hasShortClassName(RecipeDetailsActivity.class.getName())));
+        intended(hasComponent(RecipeDetailsActivity.class.getName()));
     }
-
 
 }

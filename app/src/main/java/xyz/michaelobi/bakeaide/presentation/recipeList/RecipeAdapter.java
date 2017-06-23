@@ -1,18 +1,20 @@
 package xyz.michaelobi.bakeaide.presentation.recipeList;
 
+import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.List;
 import java.util.Locale;
 
 import xyz.michaelobi.bakeaide.R;
 import xyz.michaelobi.bakeaide.data.models.Recipe;
+import xyz.michaelobi.bakeaide.presentation.recipeDetails.RecipeDetailsActivity;
 
 /**
  * BakeAide
@@ -59,6 +61,7 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
 
         ViewHolder(View itemView) {
             super(itemView);
+            itemView.setOnClickListener(this);
             tvServingCount = (TextView) itemView.findViewById(R.id.tv_serve_count);
             tvStepCount = (TextView) itemView.findViewById(R.id.tv_steps_count);
             rvIngredients = (RecyclerView) itemView.findViewById(R.id.rv_ingredients);
@@ -73,7 +76,9 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
          */
         @Override
         public void onClick(View v) {
-            Toast.makeText(v.getContext(), "Booo!", Toast.LENGTH_SHORT).show();
+            Context context = v.getContext();
+            Intent intent = new Intent(context, RecipeDetailsActivity.class);
+            context.startActivity(intent);
         }
     }
 }
