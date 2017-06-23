@@ -24,7 +24,7 @@ public class IngredientAdapter extends RecyclerView.Adapter<IngredientAdapter.Vi
 
     public IngredientAdapter(List<Ingredient> ingredients) {
         Observable.from(ingredients)
-                .limit(5)
+                .take(5)
                 .toList()
                 .subscribe(ingredientList -> this.ingredients = ingredientList);
     }

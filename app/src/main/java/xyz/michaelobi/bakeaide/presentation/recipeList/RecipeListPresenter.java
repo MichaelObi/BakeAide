@@ -5,6 +5,7 @@ import java.util.List;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
+import xyz.michaelobi.bakeaide.Injector;
 import xyz.michaelobi.bakeaide.data.RecipeRepository;
 import xyz.michaelobi.bakeaide.data.models.Recipe;
 import xyz.michaelobi.mvp.BasePresenter;
@@ -16,7 +17,7 @@ import xyz.michaelobi.mvp.BasePresenter;
  */
 
 public class RecipeListPresenter extends BasePresenter<RecipeListMvpContract.View> implements RecipeListMvpContract.Presenter {
-    private RecipeRepository recipeRepository = new RecipeRepository();
+    private RecipeRepository recipeRepository = Injector.provideRecipeRepository();
 
     @Override
     public void getRecipes() {

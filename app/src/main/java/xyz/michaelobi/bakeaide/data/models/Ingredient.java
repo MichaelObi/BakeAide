@@ -3,15 +3,21 @@ package xyz.michaelobi.bakeaide.data.models;
 import com.google.gson.annotations.SerializedName;
 
 public class Ingredient {
-
     @SerializedName("quantity")
     private float quantity;
-
     @SerializedName("measure")
     private String measure;
-
     @SerializedName("ingredient")
     private String ingredient;
+
+    public Ingredient() {
+    }
+
+    public Ingredient(String ingredient, float quantity, String measure) {
+        this.quantity = quantity;
+        this.measure = measure;
+        this.ingredient = ingredient;
+    }
 
     public float getQuantity() {
         return quantity;

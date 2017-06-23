@@ -24,7 +24,6 @@ import xyz.michaelobi.bakeaide.data.models.Recipe;
 
 public class RecipeListActivity extends AppCompatActivity implements RecipeListMvpContract.View {
 
-
     private Toolbar toolbar;
     private ProgressBar progressBar;
     private RecyclerView recyclerViewRecipes;
