@@ -38,10 +38,7 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, int position) {
         Recipe recipe = recipes.get(position);
-        viewHolder.tvStepCount.setText(String.format(Locale.getDefault(), "%d", recipe.getSteps().size()));
-        viewHolder.tvServingCount.setText(String.format(Locale.getDefault(), "%d", recipe.getServings()));
-        IngredientAdapter ingredientAdapter = new IngredientAdapter(recipe.getIngredients());
-        viewHolder.rvIngredients.setAdapter(ingredientAdapter);
+        viewHolder.setRecipe(recipe);
     }
 
     @Override
@@ -58,6 +55,7 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
 
         TextView tvServingCount, tvStepCount;
         RecyclerView rvIngredients;
+        private Recipe recipe;
 
         ViewHolder(View itemView) {
             super(itemView);
@@ -69,6 +67,14 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
             rvIngredients.setLayoutManager(new LinearLayoutManager(itemView.getContext()));
         }
 
+        void setRecipe(Recipe recipe) {
+            this.recipe = recipe;
+            tvStepCount.setText(String.format(Locale.getDefault(), "%d", recipe.getSteps().size()));
+            tvServingCount.setText(String.format(Locale.getDefault(), "%d", recipe.getServings()));
+            IngredientAdapter ingredientAdapter = new IngredientAdapter(recipe.getIngredients());
+            rvIngredients.setAdapter(ingredientAdapter);
+        }
+
         /**
          * Called when a view has been clicked.
          *
@@ -78,6 +84,7 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
         public void onClick(View v) {
             Context context = v.getContext();
             Intent intent = new Intent(context, RecipeDetailsActivity.class);
+            intent.putExtra("recipe", recipe);
             context.startActivity(intent);
         }
     }
