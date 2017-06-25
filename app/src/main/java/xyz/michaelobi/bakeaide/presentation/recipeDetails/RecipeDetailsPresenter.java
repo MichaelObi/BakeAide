@@ -1,6 +1,7 @@
 package xyz.michaelobi.bakeaide.presentation.recipeDetails;
 
 import xyz.michaelobi.bakeaide.data.models.Recipe;
+import xyz.michaelobi.bakeaide.data.models.Step;
 import xyz.michaelobi.mvp.BasePresenter;
 
 /**
@@ -16,5 +17,10 @@ public class RecipeDetailsPresenter extends BasePresenter<RecipeDetailsMvpContra
     public void setupRecipeDetails(Recipe recipe) {
         getView().showIngredients(recipe.getIngredients());
         getView().showStepList(recipe.getSteps());
+    }
+
+    @Override
+    public void showRecipeStep(Step step) {
+        getView().displayStep(step);
     }
 }

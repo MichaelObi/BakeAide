@@ -5,6 +5,8 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.Toolbar;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.style.StyleSpan;
@@ -30,16 +32,21 @@ import xyz.michaelobi.bakeaide.databinding.FragmentRecipeDetailsBinding;
 public class RecipeDetailsFragment extends Fragment implements RecipeDetailsMvpContract.View {
     RecipeDetailsMvpContract.Presenter presenter;
     FragmentRecipeDetailsBinding binding;
+    RecipeStepListAdapter recipeStepListAdapter;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        binding = DataBindingUtil.inflate(
-                inflater, R.layout.fragment_recipe_details, container, false);
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_recipe_details,
+                container, false);
         View view = binding.getRoot();
         presenter = new RecipeDetailsPresenter();
         presenter.attachView(this);
         Recipe recipe = getActivity().getIntent().getParcelableExtra("recipe");
+        recipeStepListAdapter = new RecipeStepListAdapter(step -> presenter.showRecipeStep(step));
+        binding.recipeDetailsSteps.setLayoutManager(new LinearLayoutManager(getActivity()));
+        binding.recipeDetailsSteps.setHasFixedSize(true);
+        binding.recipeDetailsSteps.setAdapter(recipeStepListAdapter);
         presenter.setupRecipeDetails(recipe);
         return view;
     }
@@ -73,6 +80,11 @@ public class RecipeDetailsFragment extends Fragment implements RecipeDetailsMvpC
 
     @Override
     public void showStepList(List<Step> steps) {
+        recipeStepListAdapter.setStepList(steps);
+    }
+
+    @Override
+    public void displayStep(Step step) {
 
     }
 }

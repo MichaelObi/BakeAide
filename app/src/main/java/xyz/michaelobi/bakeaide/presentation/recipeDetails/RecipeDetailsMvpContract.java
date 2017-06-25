@@ -20,9 +20,13 @@ public interface RecipeDetailsMvpContract {
         void showIngredients(List<Ingredient> ingredients);
 
         void showStepList(List<Step> steps);
+
+        void displayStep(Step step);
     }
 
     public interface Presenter extends Mvp.Presenter<View> {
         void setupRecipeDetails(Recipe recipe);
+
+        void showRecipeStep(Step step);
     }
 }

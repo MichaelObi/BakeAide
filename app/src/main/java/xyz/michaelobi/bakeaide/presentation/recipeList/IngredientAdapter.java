@@ -22,7 +22,7 @@ public class IngredientAdapter extends RecyclerView.Adapter<IngredientAdapter.Vi
 
     private List<Ingredient> ingredients;
 
-    public IngredientAdapter(List<Ingredient> ingredients) {
+    IngredientAdapter(List<Ingredient> ingredients) {
         Observable.from(ingredients)
                 .take(5)
                 .toList()
