@@ -1,5 +1,9 @@
-<resources>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="app_name">Bake Aide</string>
     <string name="steps">steps</string>
     <string name="serves">serves</string>
+    <string name="recipe_details_ingredient_item" translatable="false">
+        <xliff:g id="bullet">\u2022</xliff:g> <xliff:g id="name">%s</xliff:g>
+        (<xliff:g id="quantity">%s</xliff:g> <xliff:g id="measure">%s</xliff:g>)
+    </string>
 </resources>

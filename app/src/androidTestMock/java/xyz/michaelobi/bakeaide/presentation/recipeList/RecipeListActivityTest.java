@@ -60,6 +60,7 @@ public class RecipeListActivityTest {
                 .perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
         intended(hasComponent(RecipeDetailsActivity.class.getName()));
         intended(hasExtraWithKey("recipe"));
+
     }
 
 }
