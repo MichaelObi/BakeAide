@@ -45,7 +45,7 @@ public final class RecipeStepListAdapter extends RecyclerView.Adapter<RecipeStep
         return steps.size();
     }
 
-    public void setStepList(List<Step> stepList) {
+    void setStepList(List<Step> stepList) {
         steps = stepList;
         notifyDataSetChanged();
     }

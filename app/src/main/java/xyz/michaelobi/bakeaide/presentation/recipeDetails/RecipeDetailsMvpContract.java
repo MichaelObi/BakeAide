@@ -28,5 +28,7 @@ public interface RecipeDetailsMvpContract {
         void setupRecipeDetails(Recipe recipe);
 
         void showRecipeStep(Step step);
+
+        void loadStepDetails(Step step);
     }
 }

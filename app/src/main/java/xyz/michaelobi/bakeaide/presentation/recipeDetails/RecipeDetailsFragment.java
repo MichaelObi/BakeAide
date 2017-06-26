@@ -1,12 +1,14 @@
 package xyz.michaelobi.bakeaide.presentation.recipeDetails;
 
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.Toolbar;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.style.StyleSpan;
@@ -22,6 +24,8 @@ import xyz.michaelobi.bakeaide.data.models.Ingredient;
 import xyz.michaelobi.bakeaide.data.models.Recipe;
 import xyz.michaelobi.bakeaide.data.models.Step;
 import xyz.michaelobi.bakeaide.databinding.FragmentRecipeDetailsBinding;
+import xyz.michaelobi.bakeaide.presentation.recipeStep.RecipeStepActivity;
+import xyz.michaelobi.bakeaide.presentation.recipeStep.RecipeStepFragment;
 
 /**
  * BakeAide
@@ -33,6 +37,7 @@ public class RecipeDetailsFragment extends Fragment implements RecipeDetailsMvpC
     RecipeDetailsMvpContract.Presenter presenter;
     FragmentRecipeDetailsBinding binding;
     RecipeStepListAdapter recipeStepListAdapter;
+    boolean tabletView;
 
     @Nullable
     @Override
@@ -40,6 +45,7 @@ public class RecipeDetailsFragment extends Fragment implements RecipeDetailsMvpC
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_recipe_details,
                 container, false);
         View view = binding.getRoot();
+        tabletView = binding.recipeStepContainer != null;
         presenter = new RecipeDetailsPresenter();
         presenter.attachView(this);
         Recipe recipe = getActivity().getIntent().getParcelableExtra("recipe");
@@ -81,10 +87,23 @@ public class RecipeDetailsFragment extends Fragment implements RecipeDetailsMvpC
     @Override
     public void showStepList(List<Step> steps) {
         recipeStepListAdapter.setStepList(steps);
+        if (tabletView) {
+            presenter.loadStepDetails(steps.get(0));
+        }
     }
 
     @Override
     public void displayStep(Step step) {
-
+        if (!tabletView) {
+            Intent intent = new Intent(getActivity(), RecipeStepActivity.class);
+            intent.putExtra("step", step);
+            getActivity().startActivity(intent);
+        } else {
+            RecipeStepFragment recipeStepFragment = RecipeStepFragment.newInstance(step);
+            FragmentManager fragmentManager = getChildFragmentManager();
+            FragmentTransaction transaction = fragmentManager.beginTransaction();
+            transaction.replace(R.id.recipe_step_container, recipeStepFragment);
+            transaction.commit();
+        }
     }
 }

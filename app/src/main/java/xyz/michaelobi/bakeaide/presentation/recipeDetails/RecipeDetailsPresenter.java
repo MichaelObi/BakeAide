@@ -23,4 +23,9 @@ public class RecipeDetailsPresenter extends BasePresenter<RecipeDetailsMvpContra
     public void showRecipeStep(Step step) {
         getView().displayStep(step);
     }
+
+    @Override
+    public void loadStepDetails(Step step) {
+        getView().displayStep(step);
+    }
 }
