@@ -65,12 +65,17 @@ public class RecipeStepFragment extends Fragment implements ExoPlayer.EventListe
         step = getArguments().getParcelable("step");
         binding.recipeStepDesc.setText(step.getDescription());
         if (step.getThumbnailURL() != null && !step.getThumbnailURL().isEmpty()) {
+            binding.recipeStepImage.setVisibility(View.VISIBLE);
             Picasso.with(getActivity())
                     .load(step.getThumbnailURL())
                     .into(binding.recipeStepImage);
+        } else {
+            binding.recipeStepImage.setVisibility(View.GONE);
         }
-        if (step.getVideoURL() != null) {
+        if (step.getVideoURL() != null && !step.getVideoURL().isEmpty()) {
             initializeVideoPlayer(Uri.parse(step.getVideoURL()));
+        } else {
+            binding.recipeStepVideo.setVisibility(View.GONE);
         }
         return view;
     }
@@ -158,9 +163,10 @@ public class RecipeStepFragment extends Fragment implements ExoPlayer.EventListe
 
     @Override
     public void onPlayerStateChanged(boolean playWhenReady, int playbackState) {
-        if ((playbackState == ExoPlayer.STATE_READY)) {
+        if ((playbackState == ExoPlayer.STATE_READY) && playWhenReady) {
+            stateBuilder.setState(PlaybackStateCompat.STATE_PLAYING, exoPlayer.getCurrentPosition(), 1f);
+        } else if ((playbackState == ExoPlayer.STATE_READY)) {
             stateBuilder.setState(PlaybackStateCompat.STATE_PAUSED, exoPlayer.getCurrentPosition(), 1f);
-            binding.recipeStepVideo.setVisibility(View.VISIBLE);
         }
         mediaSession.setPlaybackState(stateBuilder.build());
     }

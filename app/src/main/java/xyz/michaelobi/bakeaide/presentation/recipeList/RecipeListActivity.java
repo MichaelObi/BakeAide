@@ -49,6 +49,8 @@ public class RecipeListActivity extends AppCompatActivity implements RecipeListM
         recyclerViewRecipes.setAdapter(recipeAdapter);
     }
 
+
+
     @Override
     public void showRecipes(List<Recipe> recipes) {
         recyclerViewRecipes.setVisibility(View.VISIBLE);
