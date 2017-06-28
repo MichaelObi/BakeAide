@@ -49,6 +49,9 @@ public class RecipeDetailsFragment extends Fragment implements RecipeDetailsMvpC
         presenter = new RecipeDetailsPresenter();
         presenter.attachView(this);
         Recipe recipe = getActivity().getIntent().getParcelableExtra("recipe");
+        if (recipe == null) {
+            getActivity().finish();
+        }
         recipeStepListAdapter = new RecipeStepListAdapter(step -> presenter.showRecipeStep(step));
         binding.recipeDetailsSteps.setLayoutManager(new LinearLayoutManager(getActivity()));
         binding.recipeDetailsSteps.setHasFixedSize(true);
