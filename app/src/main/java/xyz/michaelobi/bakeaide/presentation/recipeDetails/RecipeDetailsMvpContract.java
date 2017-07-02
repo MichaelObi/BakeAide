@@ -30,5 +30,7 @@ public interface RecipeDetailsMvpContract {
         void showRecipeStep(Step step);
 
         void loadStepDetails(Step step);
+
+        void saveLastOpenedRecipe(Recipe recipe);
     }
 }

@@ -1,5 +1,7 @@
 package xyz.michaelobi.bakeaide.presentation.recipeDetails;
 
+import xyz.michaelobi.bakeaide.Injector;
+import xyz.michaelobi.bakeaide.data.local.LocalRecipeRepository;
 import xyz.michaelobi.bakeaide.data.models.Recipe;
 import xyz.michaelobi.bakeaide.data.models.Step;
 import xyz.michaelobi.mvp.BasePresenter;
@@ -12,9 +14,11 @@ import xyz.michaelobi.mvp.BasePresenter;
 
 public class RecipeDetailsPresenter extends BasePresenter<RecipeDetailsMvpContract.View>
         implements RecipeDetailsMvpContract.Presenter {
+    LocalRecipeRepository localRecipeRepository = Injector.getLocalRecipeRepository();
 
     @Override
     public void setupRecipeDetails(Recipe recipe) {
+        saveLastOpenedRecipe(recipe);
         getView().showIngredients(recipe.getIngredients());
         getView().showStepList(recipe.getSteps());
     }
@@ -27,5 +31,10 @@ public class RecipeDetailsPresenter extends BasePresenter<RecipeDetailsMvpContra
     @Override
     public void loadStepDetails(Step step) {
         getView().displayStep(step);
+    }
+
+    @Override
+    public void saveLastOpenedRecipe(Recipe recipe) {
+        localRecipeRepository.storeMostRecentRecipe(recipe);
     }
 }

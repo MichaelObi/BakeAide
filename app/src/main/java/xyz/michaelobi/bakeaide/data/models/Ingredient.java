@@ -5,7 +5,11 @@ import com.google.gson.annotations.SerializedName;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class Ingredient implements Parcelable {
+import io.realm.RealmModel;
+import io.realm.annotations.RealmClass;
+
+@RealmClass
+public class Ingredient implements Parcelable, RealmModel {
     @SerializedName("quantity")
     private float quantity;
     @SerializedName("measure")

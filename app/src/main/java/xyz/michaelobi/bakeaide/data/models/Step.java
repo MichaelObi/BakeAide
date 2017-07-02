@@ -5,7 +5,11 @@ import com.google.gson.annotations.SerializedName;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class Step implements Parcelable {
+import io.realm.RealmModel;
+import io.realm.annotations.RealmClass;
+
+@RealmClass
+public class Step implements Parcelable, RealmModel {
 
     @SerializedName("videoURL")
     private String videoURL;

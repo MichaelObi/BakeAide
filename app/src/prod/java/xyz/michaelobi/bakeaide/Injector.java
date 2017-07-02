@@ -7,11 +7,20 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import xyz.michaelobi.bakeaide.data.ApiRecipeRepository;
 import xyz.michaelobi.bakeaide.data.RecipeRepository;
 import xyz.michaelobi.bakeaide.data.RecipeService;
+import xyz.michaelobi.bakeaide.data.local.LocalRecipeRepository;
+import xyz.michaelobi.bakeaide.data.local.RealmRecipeRepository;
 
 public class Injector {
     private static Retrofit retrofitInstance;
     private static RecipeService recipeService;
+    private static LocalRecipeRepository localRecipeRepository;
 
+    public static LocalRecipeRepository getLocalRecipeRepository() {
+        if (localRecipeRepository == null) {
+            localRecipeRepository = new RealmRecipeRepository();
+        }
+        return localRecipeRepository;
+    }
 
     public static Retrofit provideRetrofit() {
         if (retrofitInstance == null) {

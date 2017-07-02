@@ -5,6 +5,7 @@
     <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
+            android:name=".BakeAideApp"
             android:allowBackup="true"
             android:icon="@mipmap/ic_launcher"
             android:label="@string/app_name"
@@ -22,6 +23,16 @@
         </activity>
         <activity android:name=".presentation.recipeDetails.RecipeDetailsActivity"/>
         <activity android:name=".presentation.recipeStep.RecipeStepActivity"/>
+
+        <receiver android:name=".presentation.widget.BakingAppWidget">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE"/>
+            </intent-filter>
+
+            <meta-data
+                    android:name="android.appwidget.provider"
+                    android:resource="@xml/baking_app_widget_info"/>
+        </receiver>
     </application>
 
 </manifest>
