@@ -3,7 +3,6 @@ package xyz.michaelobi.bakeaide.presentation.recipeDetails;
 import android.content.Context;
 import android.content.Intent;
 import android.support.test.InstrumentationRegistry;
-import android.support.test.espresso.contrib.RecyclerViewActions;
 import android.support.test.espresso.intent.Intents;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
@@ -18,13 +17,13 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import io.realm.RealmList;
 import xyz.michaelobi.bakeaide.R;
 import xyz.michaelobi.bakeaide.data.models.Ingredient;
 import xyz.michaelobi.bakeaide.data.models.Recipe;
 import xyz.michaelobi.bakeaide.data.models.Step;
 
 import static android.support.test.espresso.Espresso.onView;
-import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.isCompletelyDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
@@ -56,7 +55,7 @@ public class RecipeDetailsActivityTest {
     private void setupTestData() {
         Ingredient ingredient1 = new Ingredient("Flour", 45f, "G");
         Ingredient ingredient2 = new Ingredient("Flour", 2f, "KG");
-        List<Ingredient> ingredients = new ArrayList<>();
+        RealmList<Ingredient> ingredients = new RealmList<>();
         Collections.addAll(ingredients, ingredient1, ingredient2);
         Step step1 = new Step();
         step1.setVideoURL("https://www.youtube.com/watch?v=zLRTISKN9Zk");
@@ -64,7 +63,7 @@ public class RecipeDetailsActivityTest {
         Step step2 = new Step();
         step2.setVideoURL("https://www.youtube.com/watch?v=zLRTISKN9Zk");
         step2.setShortDescription("A very long step");
-        List<Step> steps = new ArrayList<>();
+        RealmList<Step> steps = new RealmList<>();
         Collections.addAll(steps, step1, step2);
         Recipe recipe = new Recipe();
         recipe.setName("Recipe Name");

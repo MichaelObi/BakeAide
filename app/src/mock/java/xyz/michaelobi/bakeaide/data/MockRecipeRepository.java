@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import io.realm.RealmList;
 import rx.Observable;
 import xyz.michaelobi.bakeaide.data.models.Ingredient;
 import xyz.michaelobi.bakeaide.data.models.Recipe;
@@ -23,7 +24,7 @@ public class MockRecipeRepository implements RecipeRepository {
     public MockRecipeRepository() {
         Ingredient ingredient1 = new Ingredient("Flour", 45f, "G");
         Ingredient ingredient2 = new Ingredient("Flour", 2f, "KG");
-        List<Ingredient> ingredients = new ArrayList<>();
+        RealmList<Ingredient> ingredients = new RealmList<>();
         Collections.addAll(ingredients, ingredient1, ingredient2);
         Step step1 = new Step();
         step1.setVideoURL("https://www.youtube.com/watch?v=zLRTISKN9Zk");
@@ -31,7 +32,7 @@ public class MockRecipeRepository implements RecipeRepository {
         Step step2 = new Step();
         step2.setVideoURL("https://www.youtube.com/watch?v=zLRTISKN9Zk");
         step2.setShortDescription("A very long step");
-        List<Step> steps = new ArrayList<>();
+        RealmList<Step> steps = new RealmList<>();
         Collections.addAll(steps, step1, step2);
         Recipe recipe = new Recipe();
         recipe.setName("Recipe Name");
