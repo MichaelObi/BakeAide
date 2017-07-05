@@ -55,12 +55,14 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
     static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         TextView tvServingCount, tvStepCount;
+        TextView tvrecipeName;
         RecyclerView rvIngredients;
         private Recipe recipe;
 
         ViewHolder(View itemView) {
             super(itemView);
             itemView.setOnClickListener(this);
+            tvrecipeName = (TextView) itemView.findViewById(R.id.name);
             tvServingCount = (TextView) itemView.findViewById(R.id.tv_serve_count);
             tvStepCount = (TextView) itemView.findViewById(R.id.tv_steps_count);
             rvIngredients = (RecyclerView) itemView.findViewById(R.id.rv_ingredients);
@@ -70,6 +72,7 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
 
         void setRecipe(Recipe recipe) {
             this.recipe = recipe;
+            tvrecipeName.setText(recipe.getName());
             tvStepCount.setText(String.format(Locale.getDefault(), "%d", recipe.getSteps().size()));
             tvServingCount.setText(String.format(Locale.getDefault(), "%d", recipe.getServings()));
             IngredientAdapter ingredientAdapter = new IngredientAdapter(recipe.getIngredients());

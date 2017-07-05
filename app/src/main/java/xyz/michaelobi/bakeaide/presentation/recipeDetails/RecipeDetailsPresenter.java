@@ -36,5 +36,6 @@ public class RecipeDetailsPresenter extends BasePresenter<RecipeDetailsMvpContra
     @Override
     public void saveLastOpenedRecipe(Recipe recipe) {
         localRecipeRepository.storeMostRecentRecipe(recipe);
+getView().updateWidgets();
     }
 }

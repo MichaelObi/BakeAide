@@ -22,6 +22,8 @@ public interface RecipeDetailsMvpContract {
         void showStepList(List<Step> steps);
 
         void displayStep(Step step);
+
+        void updateWidgets();
     }
 
     public interface Presenter extends Mvp.Presenter<View> {

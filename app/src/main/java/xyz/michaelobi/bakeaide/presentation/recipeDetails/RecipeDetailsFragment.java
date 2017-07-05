@@ -1,11 +1,15 @@
 package xyz.michaelobi.bakeaide.presentation.recipeDetails;
 
+import android.appwidget.AppWidgetManager;
+import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
@@ -26,6 +30,7 @@ import xyz.michaelobi.bakeaide.data.models.Step;
 import xyz.michaelobi.bakeaide.databinding.FragmentRecipeDetailsBinding;
 import xyz.michaelobi.bakeaide.presentation.recipeStep.RecipeStepActivity;
 import xyz.michaelobi.bakeaide.presentation.recipeStep.RecipeStepFragment;
+import xyz.michaelobi.bakeaide.presentation.widget.BakingAppWidget;
 
 /**
  * BakeAide
@@ -108,5 +113,13 @@ public class RecipeDetailsFragment extends Fragment implements RecipeDetailsMvpC
             transaction.replace(R.id.recipe_step_container, recipeStepFragment);
             transaction.commit();
         }
+    }
+
+    @Override
+    public void updateWidgets() {
+        Context context = getActivity();
+        int[] ids = AppWidgetManager.getInstance(context).getAppWidgetIds(new ComponentName(context, BakingAppWidget.class));
+        BakingAppWidget bakingAppWidget = new BakingAppWidget();
+        bakingAppWidget.onUpdate(context, AppWidgetManager.getInstance(context), ids);
     }
 }
